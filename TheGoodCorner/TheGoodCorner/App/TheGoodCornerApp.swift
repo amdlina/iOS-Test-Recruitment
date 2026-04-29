@@ -6,11 +6,8 @@ struct TheGoodCornerApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ListingsListView(
-                viewModel: ListingsListViewModel(
-                    listingsRepository: environment.listingsRepository,
-                    categoriesRepository: environment.categoriesRepository
-                )
+            ListingsListContainer(
+                environment: environment
             )
         }
     }
