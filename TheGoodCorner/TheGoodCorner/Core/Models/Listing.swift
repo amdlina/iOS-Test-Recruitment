@@ -9,7 +9,6 @@ struct Listing: Decodable, Identifiable, Equatable {
     let creationDate: Date
     let isUrgent: Bool
     let description: String?
-    let siret: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -20,6 +19,5 @@ struct Listing: Decodable, Identifiable, Equatable {
         case creationDate = "creation_date"
         case isUrgent = "is_urgent"
         case description
-        case siret
     }
 }
