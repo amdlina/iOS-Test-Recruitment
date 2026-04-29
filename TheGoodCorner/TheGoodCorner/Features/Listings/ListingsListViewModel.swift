@@ -12,7 +12,7 @@ final class ListingsListViewModel: ObservableObject {
     }
 
     @Published private(set) var state: ViewState = .idle
-    @Published private(set) var categories: [Category] = []
+    @Published private(set) var categories: [CategoryItem] = []
     @Published var selectedCategoryId: Int? = nil {
         didSet { applyFilters() }
     }
@@ -23,7 +23,7 @@ final class ListingsListViewModel: ObservableObject {
     private let baseURL: URL
 
     private var allListings: [Listing] = []
-    private var categoriesById: [Int: Category] = [:]
+    private var categoriesById: [Int: CategoryItem] = [:]
 
     init(
         listingsRepository: ListingsRepositoryProtocol,

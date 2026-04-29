@@ -1,7 +1,7 @@
 import Foundation
 
 protocol CategoriesRepositoryProtocol {
-    func fetchCategories() async throws -> [Category]
+    func fetchCategories() async throws -> [CategoryItem]
 }
 
 final class CategoriesRepository: CategoriesRepositoryProtocol {
@@ -11,7 +11,7 @@ final class CategoriesRepository: CategoriesRepositoryProtocol {
         self.apiClient = apiClient
     }
 
-    func fetchCategories() async throws -> [Category] {
+    func fetchCategories() async throws -> [CategoryItem] {
         try await apiClient.send(.categories)
     }
 }
