@@ -1,21 +1,40 @@
 import SwiftUI
 
 struct ListingsListView: View {
-    @StateObject private var viewModel: ListingsListViewModel
 
-    init(viewModel: ListingsListViewModel) {
+    @StateObject private var viewModel: ListingsListViewModel
+    @StateObject private var draftViewModel: ClassifiedAdDraftViewModel
+    @State private var isPresentingDraftSheet = false
+
+    init(
+        viewModel: ListingsListViewModel,
+        draftViewModel: ClassifiedAdDraftViewModel
+    ) {
         _viewModel = StateObject(wrappedValue: viewModel)
+        _draftViewModel = StateObject(wrappedValue: draftViewModel)
     }
 
     var body: some View {
         NavigationStack {
-            ZStack {
+            ZStack(alignment: .bottomTrailing) {
                 Color(.systemGroupedBackground)
                     .ignoresSafeArea()
-                
+
                 content
+
+                createDraftButton
+                    .padding(.trailing, 20)
+                    .padding(.bottom, 20)
             }
             .navigationTitle("TheGoodCorner")
+            .sheet(isPresented: $isPresentingDraftSheet) {
+                ClassifiedAdDraftSheet(
+                    viewModel: draftViewModel,
+                    categories: viewModel.categories
+                ) {
+                    isPresentingDraftSheet = false
+                }
+            }
             .task {
                 if case .idle = viewModel.state {
                     await viewModel.load()
@@ -31,7 +50,6 @@ struct ListingsListView: View {
             ListingsLoadingView()
 
         case .loaded(let items):
-            
             VStack(spacing: 0) {
                 categoriesSection
                 ScrollView {
@@ -46,20 +64,17 @@ struct ListingsListView: View {
                             NavigationLink {
                                 ListingDetailView(item: item)
                             } label: {
-                                ListingRowView(
-                                    item: item
-                                )
+                                ListingRowView(item: item)
                             }
                             .buttonStyle(.plain)
                         }
-                        
                     }
                     .padding(.top, 8)
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 96)
                     .padding(.horizontal, 20)
                 }
             }
-            
+
         case .empty(let message):
             ListingsStateView(
                 systemImage: "tray",
@@ -68,7 +83,7 @@ struct ListingsListView: View {
                 buttonTitle: nil,
                 action: nil
             )
-            
+
         case .error(let message):
             ListingsStateView(
                 systemImage: "wifi.exclamationmark",
@@ -80,7 +95,23 @@ struct ListingsListView: View {
             }
         }
     }
-    
+
+    private var createDraftButton: some View {
+        Button {
+            isPresentingDraftSheet = true
+        } label: {
+            Image(systemName: "square.and.pencil")
+                .font(.title2.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 56, height: 56)
+                .background(Color.orange)
+                .clipShape(Circle())
+                .shadow(color: .black.opacity(0.18), radius: 12, x: 0, y: 6)
+        }
+        .accessibilityLabel("Créer un brouillon d’annonce")
+        .accessibilityHint("Ouvre un formulaire local pour préparer une nouvelle annonce")
+    }
+
     private var categoriesSection: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
@@ -90,7 +121,7 @@ struct ListingsListView: View {
                 ) {
                     viewModel.selectedCategoryId = nil
                 }
-                
+
                 ForEach(viewModel.categories) { category in
                     CategoryChipView(
                         title: category.name,

@@ -12,11 +12,16 @@ struct ListingsListContainer: View {
                 categoriesRepository: environment.categoriesRepository
             )
         )
+
+        _draftViewModel = StateObject(
+            wrappedValue: ClassifiedAdDraftViewModel()
+        )
     }
 
     var body: some View {
         ListingsListView(
-            viewModel: listingsViewModel
+            viewModel: listingsViewModel,
+            draftViewModel: draftViewModel
         )
     }
 }
