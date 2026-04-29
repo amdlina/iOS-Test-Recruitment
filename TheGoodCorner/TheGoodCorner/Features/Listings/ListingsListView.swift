@@ -44,7 +44,7 @@ struct ListingsListView: View {
                     ) {
                         ForEach(items) { item in
                             NavigationLink {
-                                
+                                ListingDetailView(item: item)
                             } label: {
                                 ListingRowView(
                                     item: item
