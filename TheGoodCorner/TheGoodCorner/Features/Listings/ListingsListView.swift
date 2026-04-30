@@ -21,6 +21,7 @@ struct ListingsListView: View {
                     .ignoresSafeArea()
 
                 content
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
                 createDraftButton
                     .padding(.trailing, 20)

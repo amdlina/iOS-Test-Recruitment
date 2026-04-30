@@ -6,8 +6,8 @@ final class ListingsListViewModelTests: XCTestCase {
 
     func testLoadSuccessPublishesLoadedItems() async {
         let viewModel = makeViewModel(
-            listings: [.fixture(id: 1, title: "Vélo")],
-            categories: [CategoryItem(id: 1, name: "Sport")]
+            listings: [.fixture(id: 1, title: "iphone 17")],
+            categories: [CategoryItem(id: 1, name: "Tech")]
         )
 
         await viewModel.load()
@@ -17,9 +17,9 @@ final class ListingsListViewModelTests: XCTestCase {
         }
 
         XCTAssertEqual(items.count, 1)
-        XCTAssertEqual(items[0].title, "Vélo")
-        XCTAssertEqual(items[0].categoryName, "Sport")
-        XCTAssertEqual(items[0].formattedPrice, "120 €")
+        XCTAssertEqual(items[0].title, "iphone 17")
+        XCTAssertEqual(items[0].categoryName, "Tech")
+        XCTAssertEqual(items[0].formattedPrice, "1100 €")
     }
 
     func testLoadPreservesAPIDisplayOrder() async {

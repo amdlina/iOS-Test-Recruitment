@@ -10,26 +10,26 @@ enum APIError: LocalizedError, Equatable {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "The request URL is invalid."
+            return "Une erreur de configuration est survenue."
         case .invalidResponse:
-            return "The server response is invalid."
+            return "La réponse du serveur est incorrecte."
         case .httpStatus:
-            return "The server returned an error."
+            return "Le serveur a retourné une erreur."
         case .decoding:
-            return "The server response could not be read."
+            return "La réponse du serveur n'a pas pu être interprétée."
         case .transport:
-            return "The network request failed."
+            return "Impossible de contacter le serveur."
         }
     }
 
     var recoverySuggestion: String? {
         switch self {
         case .invalidURL:
-            return "Check the API configuration."
+            return "Vérifiez la configuration de l'API."
         case .invalidResponse, .httpStatus, .decoding:
-            return "Please try again."
+            return "Veuillez réessayer."
         case .transport:
-            return "Check that the local server is running on http://localhost:8080."
+            return "Vérifiez que le serveur local fonctionne sur http://localhost:8080."
         }
     }
 }
