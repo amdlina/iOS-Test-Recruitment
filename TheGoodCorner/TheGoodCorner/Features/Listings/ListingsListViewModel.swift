@@ -28,8 +28,8 @@ final class ListingsListViewModel: ObservableObject {
     init(
         listingsRepository: ListingsRepositoryProtocol,
         categoriesRepository: CategoriesRepositoryProtocol,
-        priceFormatter: PriceFormatting = PriceFormatter(),
-        baseURL: URL = AppConfiguration.baseURL
+        priceFormatter: PriceFormatting,
+        baseURL: URL
     ) {
         self.listingsRepository = listingsRepository
         self.categoriesRepository = categoriesRepository

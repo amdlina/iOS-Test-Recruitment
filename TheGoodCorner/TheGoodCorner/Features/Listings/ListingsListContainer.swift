@@ -9,7 +9,9 @@ struct ListingsListContainer: View {
         _listingsViewModel = StateObject(
             wrappedValue: ListingsListViewModel(
                 listingsRepository: environment.listingsRepository,
-                categoriesRepository: environment.categoriesRepository
+                categoriesRepository: environment.categoriesRepository,
+                priceFormatter: PriceFormatter(),
+                baseURL: AppConfiguration.baseURL
             )
         )
 
