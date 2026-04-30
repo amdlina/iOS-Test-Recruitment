@@ -53,11 +53,6 @@
 			path = TheGoodCornerTests;
 			sourceTree = "<group>";
 		};
-		406163272F98EFCE008F3A80 /* TheGoodCornerUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = TheGoodCornerUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +85,6 @@
 			children = (
 				4061630F2F98EFCC008F3A80 /* TheGoodCorner */,
 				4061631D2F98EFCE008F3A80 /* TheGoodCornerTests */,
-				406163272F98EFCE008F3A80 /* TheGoodCornerUITests */,
 				4061630E2F98EFCC008F3A80 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,9 +159,6 @@
 			);
 			dependencies = (
 				406163262F98EFCE008F3A80 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				406163272F98EFCE008F3A80 /* TheGoodCornerUITests */,
 			);
 			name = TheGoodCornerUITests;
 			packageProductDependencies = (
